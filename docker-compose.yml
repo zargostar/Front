@@ -45,7 +45,7 @@ services:
       - my_network
   nginx:
     image: nginx:stable-alpine
-    container_name: nginx-base
+    container_name: nginx-base0
     ports:
       - 80:80
 networks:
