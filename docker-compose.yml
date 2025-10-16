@@ -49,6 +49,7 @@ services:
     container_name: nginx
     ports:
       - 80:80
+      - 8000:8000
 networks:
   my_network:
     driver: bridge
