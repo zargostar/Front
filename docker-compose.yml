@@ -6,8 +6,7 @@ services:
     networks:
       - my_network
     ports:
-      - 8081:
-      - 2000:2000
+      - 8081:8080
   front:
     image: front
     container_name: front-dev
@@ -49,7 +48,6 @@ services:
     container_name: nginx
     ports:
       - 80:80
-      - 8000:8000
 networks:
   my_network:
     driver: bridge
