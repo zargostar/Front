@@ -6,8 +6,7 @@ services:
     networks:
       - my_network
     ports:
-      - 8081:
-      - 2000:2000
+      - 8081:8082
   front:
     image: front 
     container_name: front-dev
