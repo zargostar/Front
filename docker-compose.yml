@@ -9,7 +9,7 @@ services:
       - 8081:
       - 2000:2000
   front:
-    image: front
+    image: front 
     container_name: front-dev
     hostname: front
     networks:

@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
+
 import viteLogo from "/vite.svg";
 import "./App.css";
 import environment from "./environment";
 function App() {
-  const [count, setCount] = useState(0);
+  const [obtion, setObtion] = useState(1);
   async function getdata() {
     try {
       const res = await fetch(`${environment.Server}/weatherforecast`);
       if (res.ok) {
         const data = await res.json();
-        setCount(data.length);
       }
     } catch (error: any) {
       console.log(error.message);
@@ -19,6 +18,18 @@ function App() {
   useEffect(() => {
     getdata();
   }, []);
+  function handleSelectedForm(selectedOption: number) {
+    setObtion(selectedOption);
+  }
+  function formView() {
+    if (obtion == 1) {
+      return <div>1</div>;
+    } else if (obtion == 2) {
+      return <div>2</div>;
+    } else if (obtion == 3) {
+      return <div>3</div>;
+    }
+  }
 
   return (
     <>
@@ -26,22 +37,17 @@ function App() {
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <select
+          onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+            handleSelectedForm(parseInt(e.target.value))
+          }
+        >
+          <option value={1}>Form pne</option>
+          <option value={2}>Form Two</option>
+          <option value={3}>Form Tree</option>
+        </select>
+        {formView()}
       </div>
-      <h1>Vite + React {environment.Server} </h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   );
 }
