@@ -49,6 +49,7 @@ pipeline {
       steps {
         script{
           gv.deployApp()
+          echo "Deploy to  ${ENV} with love"
         }
         // withCredentials([usernamePassword(credentialsId: 'gitcredit', usernameVariable: 'USER', passwordVariable: 'PWD')]) {
         //   sh "some_script.sh ${USER} ${PWD}"  // fixed variable names and syntax
