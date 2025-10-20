@@ -43,13 +43,15 @@ pipeline {
         message "Select the environment to deploy to"
         ok "Done"
         parameters{
-          choice(name: 'ENV',choices:['dev','staging','prod'],description:'')
+          choice(name: 'ONE',choices:['dev','staging','prod'],description:'')
+          choice(name: 'TWO',choices:['dev','staging','prod'],description:'')
         }
       }
       steps {
         script{
           gv.deployApp()
-          echo "Deploy to  ${ENV} with love"
+          echo "Deploy to  ${ONE} with love"
+          echo "Deploy to  ${TWO} with love"
         }
         // withCredentials([usernamePassword(credentialsId: 'gitcredit', usernameVariable: 'USER', passwordVariable: 'PWD')]) {
         //   sh "some_script.sh ${USER} ${PWD}"  // fixed variable names and syntax
