@@ -14,7 +14,7 @@ pipeline {
     stage("initjenkin"){
       steps{
         script{
-          gv=load "scrip.groovy"
+          gv=load 'script.groovy'
 
         }
       }
