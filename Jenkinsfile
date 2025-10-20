@@ -1,5 +1,7 @@
+def gv
 pipeline {
   agent any
+  
   environment {
     NEW_VERSION = '1.2.1'
     GIT_CREDENTIALS = credentials('gitcredit')  // fixed syntax for credentials step
@@ -9,6 +11,14 @@ pipeline {
     booleanParam(name: 'executeTest', defaultValue: true, description: 'Execute tests or not')
   }
   stages {
+    stage("init"){
+      steps{
+        script{
+          gv=load "scrip.groovy"
+
+        }
+      }
+    }
     stage("test") {
       when {
         expression {
@@ -16,18 +26,23 @@ pipeline {
         }
       }
       steps {
-        echo 'Starting unit tests...'
+        scrip{
+          gv.testApp()
+        }
       }
     }
     stage("build") {
       steps {
-        echo 'Starting to build the app...'
-        echo "Test variable my version: ${NEW_VERSION}"
+        script{
+          gv.buildApp()
+        }
       }
     }
     stage("deploy") {
       steps {
-        echo 'Deploying the app...'
+        script{
+          gv.deployApp()
+        }
         // withCredentials([usernamePassword(credentialsId: 'gitcredit', usernameVariable: 'USER', passwordVariable: 'PWD')]) {
         //   sh "some_script.sh ${USER} ${PWD}"  // fixed variable names and syntax
         // }
