@@ -28,15 +28,9 @@ pipeline {
     stage("deploy") {
       steps {
         echo 'Deploying the app...'
-<<<<<<< HEAD
         // withCredentials([usernamePassword(credentialsId: 'gitcredit', usernameVariable: 'USER', passwordVariable: 'PWD')]) {
         //   sh "some_script.sh ${USER} ${PWD}"  // fixed variable names and syntax
         // }
-=======
-        withCredentials([usernamePassword(credentialsId: 'gitcredit', usernameVariable: 'USER', passwordVariable: 'PWD')]) {
-          sh "some_script.sh ${USER} ${PWD}"  // fixed variable names and syntax
-        }
->>>>>>> 2f5de324aa554fd2171e21be303df460961b415f
         echo 'Deployment finished successfully.'
       }
     }
