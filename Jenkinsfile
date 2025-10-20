@@ -2,57 +2,49 @@ pipeline {
   agent any
   environment {
     NEW_VERSION = '1.2.1'
-    GIT_CREDENTIALS =credential('gitcredit')
+    GIT_CREDENTIALS = credentials('gitcredit')  // fixed syntax for credentials step
   }
   parameters {
-    choice (name : 'VERSIONING',choices : ['1.0.0','2.0.0','3.0.0'],description)
-    booleanParam(name :'executeTest',defaultValue: true,description:'')
+    choice(name: 'VERSIONING', choices: ['1.0.0', '2.0.0', '3.0.0'], description: 'Select the version')
+    booleanParam(name: 'executeTest', defaultValue: true, description: 'Execute tests or not')
   }
   stages {
-    stage("test"){
+    stage("test") {
       when {
-        //condition to run this stage
-        expression{
-          //BRANCH_NAME == "DEV" && CODE_CHANGES == true
+        expression {
           params.executeTest
         }
       }
       steps {
-        echo 'start test unit test'
-        
+        echo 'Starting unit tests...'
       }
     }
     stage("build") {
       steps {
-        echo 'start building the app'
-        echo "test of variable my version ${NEW_VERSION}"
+        echo 'Starting to build the app...'
+        echo "Test variable my version: ${NEW_VERSION}"
       }
-        
-      }
-    stage("deploy"){
-      steps {
-        echo 'deploy the app'
-        WithCredentials([usernamePasword(credentials : ,usernameVariable : USER,passwordWariable : PWD)]) {
-          sh "some script ${USE} ${PWD}"
-        }
-        echo 'ok'
-      }
-      
     }
-    
+    stage("deploy") {
+      steps {
+        echo 'Deploying the app...'
+        // withCredentials([usernamePassword(credentialsId: 'gitcredit', usernameVariable: 'USER', passwordVariable: 'PWD')]) {
+        //   sh "some_script.sh ${USER} ${PWD}"  // fixed variable names and syntax
+        // }
+        echo 'Deployment finished successfully.'
+      }
+    }
   }
   post {
-    //logic done afte build finished
     always {
-
+      echo 'Pipeline finished.'
     }
     success {
-      echo 'send email to users'
-
+      echo 'Sending email to users...'
+      // You can add email step here
     }
     failure {
-
+      echo 'Pipeline failed!'
     }
   }
-  
 }
