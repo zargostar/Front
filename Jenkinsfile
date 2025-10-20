@@ -11,7 +11,7 @@ pipeline {
     booleanParam(name: 'executeTest', defaultValue: true, description: 'Execute tests or not')
   }
   stages {
-    stage("init"){
+    stage("initjenkin"){
       steps{
         script{
           gv=load "scrip.groovy"
