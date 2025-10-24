@@ -10,6 +10,7 @@ function App() {
       const res = await fetch(`${environment.Server}/weatherforecast`);
       if (res.ok) {
         const data = await res.json();
+        console.log(data);
       }
     } catch (error: any) {
       console.log(error.message);
@@ -34,7 +35,7 @@ function App() {
   return (
     <>
       <div>
-        <a href="https://vite.dev" target="_blank">
+        <a href="https://vite.dev buid from jenkins" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
         <select
