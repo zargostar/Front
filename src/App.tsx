@@ -10,9 +10,12 @@ function App() {
   useEffect(() => {
     async function getdata() {
       try {
-        const url = `${environment.Server}/actors?name="maj" `;
+        //  'http://dev.api.zar.com/api/Actor/Actors?Name=majid' \
+        const url = `${environment.Server}/Actor/Actors?Name=maj `;
         console.log("url", url);
-        const res = await fetch(`${environment.Server}/actor/actors?name=maj `);
+        const res = await fetch(`${environment.Server}/Actor/Actors?Name=maj`, {
+          headers: { accept: "text/plain" },
+        });
         if (res.ok) {
           const data = await res.json();
           console.log(data);
@@ -43,7 +46,9 @@ function App() {
         <a href="https://vite.dev buid from jenkins" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
           <div>
-            Url :{environment.Server} env: {environment.Environment}
+            {/* 'http://dev.api.zar.com/api/Actor/Actors?Name=majid' \ */}
+            Url :{`${environment.Server}/actor/actors?name="maj" `} env:{" "}
+            {environment.Environment}
           </div>
         </a>
         <select
