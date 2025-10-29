@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 # is used to set the working directory inside the Docker container.
 # 👉 "From this point onward in the Dockerfile, treat /usr/src/app as the current directory."
 # Any subsequent commands (like COPY, RUN, CMD, etc.) will be executed relative to this direcory
-ARG VITE_WEB_SERVERE=http://dev.api.zar.com/api
+ARG VITE_WEB_SERVERE=http://localhost:5001/api
 #ARG VITE_APP_ENV=developmen
 # ARG ENV_FILE=.env.production
 #ENV VITE_APP_ENV=${VITE_APP_ENV}
