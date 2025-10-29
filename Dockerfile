@@ -6,9 +6,11 @@ WORKDIR /usr/src/app
 # is used to set the working directory inside the Docker container.
 # 👉 "From this point onward in the Dockerfile, treat /usr/src/app as the current directory."
 # Any subsequent commands (like COPY, RUN, CMD, etc.) will be executed relative to this direcory
-ARG VITE_WEB_SERVERE=http://localhost:8081
+ARG VITE_WEB_SERVERE=http://localhost:5191/
+#ARG VITE_APP_ENV=developmen
 # ARG ENV_FILE=.env.production
-ENV VITE_APP_ENV=development
+#ENV VITE_APP_ENV=${VITE_APP_ENV}
+ENV VITE_APP_ENV=http://dev.mu.com
 ENV VITE_WEB_SERVERE=${VITE_WEB_SERVERE}
 
 ENV VITE_IMAGE_SERVER=img.development.com
@@ -50,9 +52,9 @@ COPY --from=build /usr/src/app/nginx /etc/nginx/conf.d
 
 # Copy built app to NGINX's html directory
 COPY --from=build /usr/src/app/dist /usr/share/nginx/html
-
+COPY index7070.html /usr/share/nginx/html
 # Expose port 80
-EXPOSE 80
+EXPOSE 80 
 # CMD ["nginx", "-g", "daemon off;"]
 # Start NGINX
 ENTRYPOINT ["nginx", "-g", "daemon off;"]

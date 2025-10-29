@@ -5,18 +5,23 @@ import "./App.css";
 import environment from "./environment";
 function App() {
   const [obtion, setObtion] = useState(1);
-  async function getdata() {
-    try {
-      const res = await fetch(`${environment.Server}/weatherforecast`);
-      if (res.ok) {
-        const data = await res.json();
-        console.log(data);
-      }
-    } catch (error: any) {
-      console.log(error.message);
-    }
-  }
+  const [actors, setActors] = useState([]);
+
   useEffect(() => {
+    async function getdata() {
+      try {
+        const url = `${environment.Server}/actors?name="maj" `;
+        console.log("url", url);
+        const res = await fetch(`${environment.Server}/actor/actors?name=maj `);
+        if (res.ok) {
+          const data = await res.json();
+          console.log(data);
+          setActors(data);
+        }
+      } catch (error: any) {
+        console.log(error.message);
+      }
+    }
     getdata();
   }, []);
   function handleSelectedForm(selectedOption: number) {
@@ -24,7 +29,7 @@ function App() {
   }
   function formView() {
     if (obtion == 1) {
-      return <div>1</div>;
+      return <div>1 {actors && actors.length}</div>;
     } else if (obtion == 2) {
       return <div>2</div>;
     } else if (obtion == 3) {
@@ -37,6 +42,9 @@ function App() {
       <div>
         <a href="https://vite.dev buid from jenkins" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
+          <div>
+            Url :{environment.Server} env: {environment.Environment}
+          </div>
         </a>
         <select
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
